@@ -28,5 +28,5 @@ Back out the `dist/` folder by running
 
 ```
 git reset --soft HEAD~1
-git rm --cached ./dist
+git rm --cached -r ./dist
 ```
