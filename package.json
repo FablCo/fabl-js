@@ -4,6 +4,11 @@
   "description": "The Fabl Javascript SDK",
   "author": "Fabl <developers@fabl.co>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FablCo/fabl-js.git"
+  },
+  "bugs": "https://github.com/FablCo/fabl-js/issues",
   "main": "dist/fabl.js",
   "scripts": {
     "build:development:assets": "$(npm bin)/webpack --config config/webpack/development.config.js --display-error-details --verbose",
