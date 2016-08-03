@@ -5,9 +5,8 @@
 ## Preparing the release
 
 1. Update `version` in [package.json](package.json)
-2. Add an entry to [CHANGELOG.md](CHANGELOG.md) for this new release
-3. Update [README.md](README.md) to reflect this new release (in both the title and sample `<script>` tag)
-4. Commit these changes and push to master
+2. Update [README.md](README.md) to reflect this new release (in both the title and sample `<script>` tag)
+3. Commit these changes and push to master
 
 ## Cutting the release
 
@@ -16,6 +15,7 @@
 3. Commit this with `git commit -m "v{version} release"` but *don't push*
 4. Tag this commit with `git tag v{version}`
 5. Push *only* the tag with `git push origin v{version}`
+6. (if a mainline release) Document the new release on Github at [https://github.com/FablCo/fabl-js/releases/new](https://github.com/FablCo/fabl-js/releases/new) and select the `v{version}` tag
 
 ## Deploying to AWS
 
