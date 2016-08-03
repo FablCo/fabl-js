@@ -1,11 +1,11 @@
-# Fabl Javascript SDK (v1.0.0-rc2)
+# Fabl Javascript SDK (v1.0.0)
 
 ## Installation (for local development only)
 
 Add this script tag to the bottom of your sandbox's `<head>`:
 
 ```html
-<script type="text/javascript" src="https://d389x1p5jhf88e.cloudfront.net/v1.0.0-rc2/fabl.min.js"></script>
+<script type="text/javascript" src="https://d389x1p5jhf88e.cloudfront.net/v1.0.0/fabl.min.js"></script>
 ```
 
 ## Script Loader
