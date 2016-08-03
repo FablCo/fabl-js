@@ -8,6 +8,7 @@
   "scripts": {
     "build:development:assets": "$(npm bin)/webpack --config config/webpack/development.config.js --display-error-details --verbose",
     "build:production:assets": "$(npm bin)/webpack --config config/webpack/production.config.js --display-error-details --progress --verbose",
+    "compress:production:assets": "gzip --best --force --keep ./dist/fabl.min.js",
     "clean": "$(npm bin)/rimraf ./dist",
     "dist": "npm run clean && npm run build:production:assets && npm run compress:production:assets"
   },
