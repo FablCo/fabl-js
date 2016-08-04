@@ -1,0 +1,7 @@
+config/
+dist/
+src/
+.babelrc
+.gitignore
+bower.json
+DEPLOYING.md
