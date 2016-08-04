@@ -22,6 +22,11 @@
 1. Push the new assets to S3 with `aws s3 cp --acl public-read --cache-control 'public, max-age=31536000' --recursive ./dist s3://fabl-js/v{version}/`
 2. Verify the assets have been published by visiting `https://d389x1p5jhf88e.cloudfront.net/v{version}/fabl.min.js`
 
+## Deploying to NPM
+
+1. Check that the package works correctly by installing it locally first via `npm install --save /path/to/fabl-js`
+2. Publish to NPM with `npm publish` (*NOTE: this cannot be re/undone, so make sure it works first!*)
+
 ## Cleanup
 
 Back out the `dist/` folder by running
