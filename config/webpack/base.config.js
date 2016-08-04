@@ -2,12 +2,13 @@ var path = require("path");
 var webpack = require("webpack");
 
 var rootPath = path.resolve(__dirname, "..", "..");
+var srcPath = path.resolve(rootPath, "src");
 var outputPath = path.resolve(rootPath, "dist");
 
 module.exports = {
   context: rootPath,
   entry: {
-    fabl: "./index.js"
+    fabl: path.resolve(srcPath, "fabl.js")
   },
 
   module: {
