@@ -1,0 +1,20 @@
+{
+  "name": "fabl-js",
+  "description": "The Fabl Javascript SDK",
+  "main": "dist/fabl.js",
+  "authors": [
+    "Fabl <developers@fabl.co>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "fabl"
+  ],
+  "homepage": "https://github.com/FablCo/fabl-js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
