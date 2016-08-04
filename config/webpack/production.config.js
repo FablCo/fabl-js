@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var UnminifiedWebpackPlugin = require("unminified-webpack-plugin");
 
 var baseConfig = require("./base.config.js");
 
@@ -18,6 +19,7 @@ module.exports = Object.assign({}, baseConfig, {
       compress: {
         warnings: false
       }
-    })
+    }),
+    new UnminifiedWebpackPlugin()
   ]
 });
