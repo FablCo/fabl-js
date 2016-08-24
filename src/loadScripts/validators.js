@@ -2,10 +2,9 @@ import isArray from "lodash/isArray";
 import isFunction from "lodash/isFunction";
 import isString from "lodash/isString";
 
-const invalidCallbackErrorMessage = "loadScripts: expected second argument to be a callback function (optional)";
-export function validateCallback(callback) {
+export function validateCallback(callback, errorMessage) {
   if (!!callback && !isFunction(callback)) {
-    throw new Error(invalidCallbackErrorMessage);
+    throw new Error(errorMessage);
   }
 
   const done = () => {
@@ -17,8 +16,7 @@ export function validateCallback(callback) {
   return done;
 }
 
-const invalidUrlsErrorMessage = "loadScripts: expected first argument to be a url string or an array of url strings";
-export function validateUrls(urlOrUrls) {
+export function validateUrls(urlOrUrls, errorMessage) {
   let urls;
   if (isString(urlOrUrls)) {
     urls = [ urlOrUrls ];
@@ -28,11 +26,11 @@ export function validateUrls(urlOrUrls) {
 
   // validate the urlOrUrls parameter
   if (!urls) {
-    throw new Error(invalidUrlsErrorMessage);
+    throw new Error(errorMessage);
   }
   urls.forEach((url) => {
     if (!isString(url)) {
-      throw new Error(invalidUrlsErrorMessage);
+      throw new Error(errorMessage);
     }
   });
 
