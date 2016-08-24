@@ -44,3 +44,72 @@ Fabl.loadScripts("https://code.jquery.com/jquery-1.12.4.min.js", function() {
   });
 });
 ```
+
+## Event Tracking
+
+To take advantage of Fabl's activity tracking service with your custom components, you will need to trigger client-side events where appropriate.
+
+### `Fabl.tracking.attachToElement(element, eventType[, trigger])`
+
+You can automatically trigger a 'Clicked Link' Fabl event in response to all user clicks on a specific element:
+
+```javascript
+var button = document.getElementById("custom_button");
+Fabl.tracking.attachToElement(button, Fabl.tracking.CLICKED_LINK);
+```
+
+You can specify the desired event trigger. Otherwise, it defaults to `Fabl.tracking.CLICK`:
+
+```javascript
+var button = document.getElementById("custom_button");
+Fabl.tracking.attachToElement(button, Fabl.tracking.CLICKED_LINK, Fabl.tracking.CLICK);
+```
+
+You can use jQuery elements instead of regular DOM elements:
+
+```javascript
+Fabl.loadScripts("https://code.jquery.com/jquery-1.12.4.min.js", function() {
+    var $button = $("#custom_button");
+    Fabl.tracking.attachToElement($button, Fabl.tracking.CLICKED_LINK);
+});
+```
+
+### `Fabl.tracking.triggerEvent(eventType, element[, event])`
+
+Alternatively, you can manaually trigger a 'Clicked Link' Fabl event in your own event handlers:
+
+```javascript
+var button = document.getElementById("custom_button");
+button.addEventListener("click", function(event) {
+  // your custom code...
+
+  Fabl.tracking.triggerEvent(Fabl.tracking.CLICKED_LINK, button, event);
+});
+```
+
+You can use jQuery elements instead of regular DOM elements:
+
+```javascript
+Fabl.loadScripts("https://code.jquery.com/jquery-1.12.4.min.js", function() {
+    var $button = $("#custom_button");
+    $button.on("click", function(event) {
+        Fabl.tracking.triggerEvent(Fabl.tracking.CLICKED_LINK, $button, event);
+    });
+});
+```
+
+### Supported Event Types
+
+All of the supported event types are available in `Fabl.tracking.EVENT_NAMES`
+
+| Event Type                             | Description                                       |
+| -------------------------------------- | ------------------------------------------------- |
+| `Fabl.tracking.CLICKED_LINK`           | For whenever a button or CTA is clicked           |
+
+### Supported Triggers
+
+All of the supported event triggers are available in `Fabl.tracking.EVENT_TRIGGERS`
+
+| Trigger                                | Description                                       |
+| -------------------------------------- | ------------------------------------------------- |
+| `Fabl.tracking.CLICK`                  | The "click" mouse event                           |
