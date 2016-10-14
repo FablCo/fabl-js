@@ -1,4 +1,4 @@
-# Fabl Javascript SDK (v1.2.0)
+# Fabl Javascript SDK (v1.2.1)
 
 ## Installation
 
@@ -7,7 +7,7 @@
 Add this script tag to the bottom of your page's `<head>`:
 
 ```html
-<script type="text/javascript" src="https://d389x1p5jhf88e.cloudfront.net/v1.2.0/fabl.min.js"></script>
+<script type="text/javascript" src="https://d389x1p5jhf88e.cloudfront.net/v1.2.1/fabl.min.js"></script>
 ```
 
 ## Script Loader
