@@ -1,8 +1,10 @@
 # Fabl Javascript SDK (v1.1.0)
 
-## Installation (for local development only)
+## Installation
 
-Add this script tag to the bottom of your sandbox's `<head>`:
+*Note: this is only required when [embedding stories](#embedding-stories) or testing in a local sandbox, not within your Fabl story*
+
+Add this script tag to the bottom of your page's `<head>`:
 
 ```html
 <script type="text/javascript" src="https://d389x1p5jhf88e.cloudfront.net/v1.1.0/fabl.min.js"></script>
@@ -113,3 +115,29 @@ All of the supported event triggers are available in `Fabl.tracking.EVENT_TRIGGE
 | Trigger                                | Description                                       |
 | -------------------------------------- | ------------------------------------------------- |
 | `Fabl.tracking.CLICK`                  | The "click" mouse event                           |
+
+
+## Embedding Stories
+
+You can embed Fabl stories on your own website using `Fabl.embedStory`.
+
+Before getting started, you'll need to [install the Fabl.js library](#installation) on the desired page(s) of your site.
+
+Once the library is installed you can embed a story onto the page like so:
+```html
+<!-- add an element for the story to be embedded within -->
+<div id="fabl-story-container"></div>
+
+<!-- add a script tag (or add the contents of this to an existing script) -->
+<script type="text/javascript">
+  (function() {
+    var storyContainer = document.getElementById("fabl-story-container");
+    // NOTE: if you prefer jQuery, you could replace this with:
+    //    var storyContainer = $("#fabl-story-container").get(0);
+
+    var storyUrl = "http://stories.domain.com/path-to-the-desired-story";
+
+    Fabl.embedStory(storyContainer, storyUrl);
+  })();
+</script>
+```

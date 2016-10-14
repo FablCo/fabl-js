@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Fabl.js: embedding stories in other sites</title>
+
+    <!-- Bootstrap (NOT REQUIRED for Fabl.js to work, just used for demonstration purposes) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" integrity="sha256-fmMNkMcjSw3xcp9iuPnku/ryk9kaWgrEbfJfKmdZ45o=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.css" integrity="sha256-xOpS+e/dER8z72w+qryCieOGysQI8cELAVt3MHG0phY=" crossorigin="anonymous" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          Left gutter content
+        </div>
+        <div class="col-sm-6">
+          <!-- Step 2 of 3: add an element to embed the story within -->
+          <div id="fabl-story-container"></div>
+        </div>
+        <div class="col-sm-3">
+          Right gutter content
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 1 of 3: install Fabl.js client library -->
+    <script type="text/javascript" src="https://d389x1p5jhf88e.cloudfront.net/v1.2.0/fabl.min.js"></script>
+
+    <!-- Step 3 of 3: call Fabl.embedStory with the container element and the full story URL -->
+    <script type="text/javascript">
+      (function() {
+        var containerElement = document.getElementById("fabl-story-container");
+        var storyUrl = "http://storyboard.fabl.co/breaking-the-rules-of-branding/";
+
+        Fabl.embedStory(containerElement, storyUrl);
+      })();
+    </script>
+  </body>
+</html>
