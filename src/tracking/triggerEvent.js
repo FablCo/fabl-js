@@ -2,7 +2,7 @@ import { getEventHandler } from "./eventHandler";
 import {
   validateElement,
   validateEventName
-} from "./validators";
+} from "../validators";
 
 const functionName = "tracking.triggerEvent";
 export default function triggerEvent(_eventName, _element, event = null) {

@@ -1,10 +1,10 @@
 import { getEventHandler } from "./eventHandler";
-import { CLICK } from "./eventTriggers";
+import { CLICK } from "../constants/eventTriggers";
 import {
   validateElement,
   validateEventName,
   validateEventTrigger
-} from "./validators";
+} from "../validators";
 
 const functionName = "tracking.attachToElement";
 export default function attachToElement(_element, _eventName, _eventTrigger = CLICK) {

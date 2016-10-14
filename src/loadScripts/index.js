@@ -1,7 +1,10 @@
 import after from "lodash/after";
 
 import loadScript from "./loadScript";
-import { validateCallback, validateUrls } from "./validators";
+import {
+  validateCallback,
+  validateUrls
+} from "../validators";
 
 const functionName = "loadScripts";
 export default function loadScripts(urlOrUrls, callback) {
