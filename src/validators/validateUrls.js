@@ -1,4 +1,5 @@
 import isArray from "lodash/isArray";
+import isString from "lodash/isString";
 
 import validateString from "./validateString";
 
