@@ -1,11 +1,11 @@
 import { validateElement, validateString } from "../validators";
-import buildStoryProxy from "./buildStoryProxy";
+import Portal from "./Portal";
 
 const functionName = "embedStory";
 export default function embedStory(_element, _storyUrl) {
   const element = validateElement(_element, `${functionName}: expected first argument to be a DOM element`);
   const storyUrl = validateString(_storyUrl, `${functionName}: expected second argument to be a Fabl story URL`);
 
-  const storyProxy = buildStoryProxy(storyUrl);
-  storyProxy.render(element);
+  const portal = new Portal({ url: storyUrl, embedTo: element });
+  portal.embed();
 }
