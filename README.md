@@ -7,7 +7,7 @@
 Add this script tag to the bottom of your page's `<head>`:
 
 ```html
-<script type="text/javascript" src="https://d389x1p5jhf88e.cloudfront.net/v1.2.2/fabl.min.js"></script>
+<script type="text/javascript" src="https://d389x1p5jhf88e.cloudfront.net/v1.2.3/fabl.min.js"></script>
 ```
 
 ## Script Loader
