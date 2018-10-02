@@ -5,7 +5,7 @@ export default class Portal {
 
   constructor(props) {
     this.props = props;
-    window.addEventListener('scroll', this.scroll);
+    //window.addEventListener('scroll', this.scroll);
     window.addEventListener('message', this.message);
     window.addEventListener('resize', this.resize);
   }
@@ -16,11 +16,17 @@ export default class Portal {
     this.frame.setAttribute("style", Portal.defaultFrameStyles);
     this.frame.setAttribute("scrolling", "no");
     this.frame.setAttribute("width", "100%");
-    this.frame.setAttribute("height", window.innerHeight);
+    this.frame.setAttribute("height", "100%");
     this.frame.addEventListener("load", () => {
-      this.postMessage({ name: "ping" });
-      this.postMessage({ name: "subscribe", subscriberName: "frame", subscriberGroup: "scroll" });
-      this.callIfExists(this.props.didLoad);
+      console.log("--- I'm here! ---", "Loaded");
+      setTimeout(
+        () => {
+          console.log("--- I'm here! ---", "Time out");
+          this.postMessage({ name: "ping" });
+          this.postMessage({ name: "subscribe", subscriberName: "frame", subscriberGroup: "scroll" });
+          this.callIfExists(this.props.didLoad);
+        }, 2000
+      )
     });
 
     return this.frame;
@@ -79,7 +85,7 @@ export default class Portal {
       }
       if (data.name === 'totalHeight') {
         this.frameContentHeight = data.response;
-        this.props.embedTo.setAttribute('style', "height: " + data.response + "px; position: relative");
+        this.frame.setAttribute('style', Portal.defaultFrameStyles + "height: " + data.response + "px");
       }
       if (data.name === 'scroll') {
         window.scrollTo(0, data.scroll + this.frameOffsetTop);
