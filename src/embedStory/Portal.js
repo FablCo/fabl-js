@@ -18,11 +18,13 @@ export default class Portal {
     this.frame.setAttribute("width", "100%");
     this.frame.setAttribute("height", "100%");
     this.frame.addEventListener("load", () => {
-      console.log("--- I'm here! ---", "Loaded");
       setTimeout(
         () => {
-          console.log("--- I'm here! ---", "Time out");
           this.postMessage({ name: "ping" });
+          this.postMessage({
+            name: "parentWindowParams",
+            params: { innerHeight: window.innerHeight - (this.props.notSenseOffsetTop ? this.props.notSenseOffsetTop  : 0 ) }
+          });
           this.postMessage({ name: "subscribe", subscriberName: "frame", subscriberGroup: "scroll" });
           this.callIfExists(this.props.didLoad);
         }, 2000
