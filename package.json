@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "lodash": "^4.14.1",
+    "ua-parser-js": "^0.7.18",
     "url-parse": "^1.1.6"
   },
   "devDependencies": {
