@@ -149,6 +149,7 @@ export default class Portal {
 
   embed = () => {
     this.props.embedTo.appendChild(this.generateFrame());
+    setInterval(this.resize, 1000);
     this.frameOffsetTop = this.frame.offsetTop;
     this.frameOffsetTop += this.props.notSenseOffsetTop ? this.props.notSenseOffsetTop : 0;
   }
