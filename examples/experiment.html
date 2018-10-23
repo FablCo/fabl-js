@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="framediv" id="div1">
+  <iframe id="frame1" class="my-frame" src="frame1.html" ></iframe>
+</div>
+<div class="framediv" id="div2">
+  <iframe id="frame2" class="my-frame" src="frame2.html" ></iframe>
+</div>
+
+<style>
+  .my-frame {
+    float: left;
+    width: 500px;
+    height: 1000px;
+  }
+
+  .framediv {
+    height: 5000px;
+    float: left;
+    width: 500px
+  }
+  #div1,#div2 {
+
+  }
+</style>
+<script>
+  //console.log(window.frames);
+  console.log('frame1 ', document.getElementById('frame1').contentWindow.location.hash);
+  var frame1 = document.getElementById('frame1').contentWindow;
+  function runOnScroll(){
+    var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+    //console.log(scrolled,'--', Date.now());
+
+    window.location.hash = scrolled;
+    frame1.postMessage( {'scroll': scrolled , 'time': Date.now()}, '*');
+  }
+  window.addEventListener("scroll", runOnScroll);
+
+
+  document.getElementById('frame1').contentWindow.location.hash ='50'
+  console.log('frame1 ', document.getElementById('frame1').contentWindow.location.hash);
+</script>
+
+</body>
+</html>

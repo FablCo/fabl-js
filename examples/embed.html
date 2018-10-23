@@ -1871,12 +1871,14 @@
   window.addEventListener('load', function() {
     var storyContainer = document.getElementById("frame-cont");
     var storyUrl = "http://127.0.0.1:3000/empty";
+    //var storyUrl = "http://localhost:3000/header-test";
 
     Fabl.embedStory(
       storyContainer,
       storyUrl,
       {
-        notSenseOffsetTop: 65,
+        notSenseOffsetTop: $('.top-nav:first').outerHeight(),
+        iframePadding: (navigator.userAgent.match(/iPad/i) != null ? 25 : 10),
       }
     );
   });

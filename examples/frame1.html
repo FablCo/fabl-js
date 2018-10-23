@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body id="body_id">
+<div class="first-div">
+
+</div>
+<div class="second">
+  <img src="https://d3t82k9xxpwsnw.cloudfront.net/attachments/media/15197/processed/ACLENSHEADER_intro.large.medium.jpg" />
+</div>
+
+<style>
+  .first-div {
+    height:3000px;
+    widht: 100%;
+  }
+  .second {
+    height:3000px;
+    widht: 100%;
+  }
+  body {
+    transition: all 0.005s;
+  }
+
+</style>
+
+<script>
+  var  startPoint = 2700;
+  window.scrollTo(0, startPoint);
+  function runOnScroll(){
+    var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+    console.log(scrolled,'--', Date.now());
+
+    window.location.hash = scrolled;
+  }
+  window.addEventListener("scroll", runOnScroll);
+
+
+  window.addEventListener("message", receiveMessage, false);
+
+  function receiveMessage(event)
+  {
+    var delay = (Date.now() - event.data.time)
+    console.log('post','--', event.data.scroll, '---', Date.now() - event.data.time);
+    //document.documentElement.scrollTop = event.data.scroll;
+
+    //document.documentElement.style.transition('all '+delay*0.001+'s');
+    //window.scrollTo( 0, startPoint - event.data.scroll);
+    var scrollToVal = event.data.scroll;
+    var scrollNowValue = document.documentElement.scrollTop;
+    var step = 1;
+    if(scrollToVal > scrollNowValue) {
+      while(scrollToVal > scrollNowValue  ) {
+        scrollNowValue = scrollNowValue+step;
+        window.scrollTo({
+                          'left': 0,
+                          'top': (startPoint - scrollNowValue)
+                        })
+      }
+    }
+
+    if(scrollToVal < scrollNowValue) {
+      while(scrollToVal < scrollNowValue  ) {
+        scrollNowValue = scrollNowValue-step;
+        window.scrollTo({
+                          'left': 0,
+                          'top': (startPoint - scrollNowValue)
+                        })
+      }
+    }
+
+    //window.scrollTo( {'left':0, 'top': (startPoint - event.data.scroll)});
+  }
+
+</script>
+
+</body>
+</html>
