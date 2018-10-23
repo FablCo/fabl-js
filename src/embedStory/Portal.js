@@ -121,6 +121,7 @@ export default class Portal {
 
   message = () => {
     try {
+      const $this = this;
       const data = JSON.parse(event.data);
       if (data.name === 'ping' && data.response === 'pong') {
         this.postMessage({ name: 'totalHeight' });
@@ -131,6 +132,11 @@ export default class Portal {
           }
         });
         this.postMessage({ name: "subscribe", subscriberName: "frame", subscriberGroup: "scroll" });
+        setInterval(
+          () => {
+            $this.postMessage({ name: 'totalHeight' });
+          }, 1000
+        );
       }
       if (data.name === 'totalHeight') {
         this.applyTotalHeightOfFrame(data);
@@ -149,7 +155,6 @@ export default class Portal {
 
   embed = () => {
     this.props.embedTo.appendChild(this.generateFrame());
-    setInterval(this.resize, 1000);
     this.frameOffsetTop = this.frame.offsetTop;
     this.frameOffsetTop += this.props.notSenseOffsetTop ? this.props.notSenseOffsetTop : 0;
   }
