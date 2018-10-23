@@ -22,6 +22,7 @@ export default class Portal {
     this.frame.setAttribute("scrolling", "no");
     this.frame.setAttribute("width", "100%");
     this.frame.setAttribute("height", window.innerHeight);
+    this.frame.setAttribute("allowFullScreen", true);
     this.frame.addEventListener("load", () => {
       setTimeout(
         () => {
@@ -119,19 +120,23 @@ export default class Portal {
     );
   }
 
+  getInnerHeight = () => (
+    window.innerHeight - (this.props.notSenseOffsetTop ? this.props.notSenseOffsetTop : 0 )
+  );
+
   message = () => {
     try {
       const $this = this;
       const data = JSON.parse(event.data);
       if (data.name === 'ping' && data.response === 'pong') {
         this.postMessage({ name: 'totalHeight' });
-        this.postMessage({
-          name: "parentWindowParams",
-          params: {
-            innerHeight: window.innerHeight - (this.props.notSenseOffsetTop ? this.props.notSenseOffsetTop : 0 )
-          }
-        });
         this.postMessage({ name: "subscribe", subscriberName: "frame", subscriberGroup: "scroll" });
+        this.applyForIOS(() => {
+          this.postMessage({
+            name: "parentWindowParams",
+            params: { innerHeight: this.getInnerHeight() }
+          });
+        })
         setInterval(
           () => {
             $this.postMessage({ name: 'totalHeight' });
