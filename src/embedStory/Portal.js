@@ -103,6 +103,12 @@ export default class Portal {
 
     this.postMessage({ name: "parentWindowParams", params: { scrollTop: scrollPos } });
   }
+  
+  sendNotSenseOffsetTop = () => {
+    const notSenseOffsetTop = this.getNonSenseOffsetTop(this.props.offsetsConfig);
+  
+    this.postMessage({ name: "parentWindowParams", params: { notSenseOffsetTop: notSenseOffsetTop } });
+  }
 
   applyTotalHeightOfFrame = (data) => {
     this.applyForIOS(
@@ -120,9 +126,11 @@ export default class Portal {
     );
   }
 
-  getInnerHeight = () => (
-    window.innerHeight - (this.props.notSenseOffsetTop ? this.props.notSenseOffsetTop : 0 )
-  );
+  getInnerHeight = () => {
+    let notSenseOffsetTop = this.getNonSenseOffsetTop(this.props.offsetsConfig);
+  
+    return (window.innerHeight - (notSenseOffsetTop ? notSenseOffsetTop : 0))
+  };
 
   message = () => {
     try {
@@ -131,12 +139,14 @@ export default class Portal {
       if (data.name === 'ping' && data.response === 'pong') {
         this.postMessage({ name: 'totalHeight' });
         this.postMessage({ name: "subscribe", subscriberName: "frame", subscriberGroup: "scroll" });
-        this.applyForIOS(() => {
+        //this.applyForIOS(() => {
           this.postMessage({
             name: "parentWindowParams",
-            params: { innerHeight: this.getInnerHeight() }
+            params: {
+              innerHeight: this.getInnerHeight(),
+              notSenseOffsetTop: this.getNonSenseOffsetTop(this.props.offsetsConfig)}
           });
-        })
+        //})
         setInterval(
           () => {
             $this.postMessage({ name: 'totalHeight' });
@@ -149,6 +159,10 @@ export default class Portal {
       if (data.name === 'scroll') {
         window.scrollTo(0, data.scroll + this.frameOffsetTop);
       }
+  
+      if (data.name === 'resize') {
+        window.scrollTo(0, data.scroll + this.frameOffsetTop);
+      }
     } catch (exception) {
       console.log('Ignored command', event);
     }
@@ -156,12 +170,25 @@ export default class Portal {
 
   resize = () => {
     this.frame.setAttribute("height", window.innerHeight);
+    this.sendNotSenseOffsetTop()
+  }
+  
+  getNonSenseOffsetTop = (offsetsConfig) => {
+    let result = 0;
+
+    if(Array.isArray(offsetsConfig)){
+      let range = offsetsConfig.filter(el => ($(window).width() > el.from && $(window).width() <= el.to));
+      result = range[0].offsetVal;
+    }
+    
+    return result;
   }
 
   embed = () => {
+    let notSenseOffsetTop = this.getNonSenseOffsetTop(this.props.offsetsConfig);
     this.props.embedTo.appendChild(this.generateFrame());
     this.frameOffsetTop = this.frame.offsetTop;
-    this.frameOffsetTop += this.props.notSenseOffsetTop ? this.props.notSenseOffsetTop : 0;
+    this.frameOffsetTop += notSenseOffsetTop ? notSenseOffsetTop : 0;
   }
 
   postMessage = (postObject) => {

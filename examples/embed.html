@@ -1873,14 +1873,37 @@
     var storyUrl = "http://127.0.0.1:3000/empty";
     //var storyUrl = "http://localhost:3000/header-test";
 
-    Fabl.embedStory(
-      storyContainer,
-      storyUrl,
-      {
-        notSenseOffsetTop: $('.top-nav:first').outerHeight(),
-        iframePadding: (navigator.userAgent.match(/iPad/i) != null ? 25 : 10),
-      }
-    );
+    Fabl.embedStory(storyContainer, storyUrl, {
+      notSenseOffsetTop: 70,
+      offsetsConfig: [
+        {
+          from: 0,
+          to: 720,
+          offsetVal: 35,
+        },
+        {
+          from: 720,
+          to: 860,
+          offsetVal: 20,
+        },
+        {
+          from: 860,
+          to: 1067,
+          offsetVal: 70,
+        },
+        {
+          from: 1067,
+          to: 1336,
+          offsetVal: 70,
+        },
+        {
+          from: 1336,
+          to: 999999,
+          offsetVal: 70,
+        }
+      ],
+
+    });
   });
 </script>
 
