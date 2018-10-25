@@ -139,14 +139,14 @@ export default class Portal {
       if (data.name === 'ping' && data.response === 'pong') {
         this.postMessage({ name: 'totalHeight' });
         this.postMessage({ name: "subscribe", subscriberName: "frame", subscriberGroup: "scroll" });
-        //this.applyForIOS(() => {
+        this.applyForIOS(() => {
           this.postMessage({
             name: "parentWindowParams",
             params: {
               innerHeight: this.getInnerHeight(),
               notSenseOffsetTop: this.getNonSenseOffsetTop(this.props.offsetsConfig)}
           });
-        //})
+        })
         setInterval(
           () => {
             $this.postMessage({ name: 'totalHeight' });
