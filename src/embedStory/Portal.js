@@ -75,7 +75,7 @@ export default class Portal {
   )
 
   scroll = () => {
-    this.applyForIOS(this.sendScrolledPosition);
+    //this.applyForIOS(this.sendScrolledPosition);
     this.applyExceptIOS(this.moveFrame);
   }
 
@@ -113,8 +113,10 @@ export default class Portal {
   applyTotalHeightOfFrame = (data) => {
     this.applyForIOS(
       () => {
+        //this.frameContentHeight = data.response;
+        //this.frame.setAttribute('style', Portal.defaultFrameStyles + "height: " + data.response + "px");
         this.frameContentHeight = data.response;
-        this.frame.setAttribute('style', Portal.defaultFrameStyles + "height: " + data.response + "px");
+        this.props.embedTo.setAttribute('style', "height: " + data.response + "px; position: relative");
       }
     );
 
@@ -149,12 +151,12 @@ export default class Portal {
         })
         setInterval(
           () => {
-            $this.postMessage({ name: 'totalHeight' });
+            //$this.postMessage({ name: 'totalHeight' });
           }, 1000
         );
       }
       if (data.name === 'totalHeight') {
-        this.applyTotalHeightOfFrame(data);
+        //this.applyTotalHeightOfFrame(data);
       }
       if (data.name === 'scroll') {
         window.scrollTo(0, data.scroll + this.frameOffsetTop);
