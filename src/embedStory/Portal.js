@@ -19,10 +19,11 @@ export default class Portal {
     this.frame = document.createElement("iframe");
     this.frame.setAttribute("src", this.props.url + '?frame=true');
     this.frame.setAttribute("style", Portal.defaultFrameStyles);
-    this.frame.setAttribute("scrolling", "no");
+    this.frame.setAttribute("scrolling", "yes");
     this.frame.setAttribute("width", "100%");
-    this.frame.setAttribute("height", window.innerHeight);
+    this.frame.setAttribute("height", "1024px");
     this.frame.setAttribute("allowFullScreen", true);
+    this.frame.setAttribute("allow", "autoplay; encrypted-media; fullscreen");
     this.frame.addEventListener("load", () => {
       setTimeout(
         () => {
@@ -115,13 +116,14 @@ export default class Portal {
       () => {
         //this.frameContentHeight = data.response;
         //this.frame.setAttribute('style', Portal.defaultFrameStyles + "height: " + data.response + "px");
-        this.frameContentHeight = data.response;
-        this.props.embedTo.setAttribute('style', "height: " + data.response + "px; position: relative");
+        //this.frameContentHeight = data.response;
+        //this.props.embedTo.setAttribute('style', "height: " + data.response + "px; position: relative");
       }
     );
 
     this.applyExceptIOS(
       () => {
+        console.log('data.response', data.response)
         this.frameContentHeight = data.response;
         this.props.embedTo.setAttribute('style', "height: " + data.response + "px; position: relative");
       }
@@ -156,7 +158,7 @@ export default class Portal {
         );
       }
       if (data.name === 'totalHeight') {
-        //this.applyTotalHeightOfFrame(data);
+        this.applyTotalHeightOfFrame(data);
       }
       if (data.name === 'scroll') {
         window.scrollTo(0, data.scroll + this.frameOffsetTop);

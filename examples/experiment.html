@@ -5,13 +5,14 @@
   <title>Title</title>
 </head>
 <body>
-<div class="framediv" id="div1">
-  <iframe id="frame1" class="my-frame" src="frame1.html" ></iframe>
+<div class="wrapper">
+  <div class="framediv" id="div1">
+    <iframe id="frame1" class="my-frame" src="frame1.html" style="height:700px"></iframe>
+  </div>
+  <div class="framediv" id="div2">
+    <iframe id="frame2" class="my-frame" src="frame2.html" ></iframe>
+  </div>
 </div>
-<div class="framediv" id="div2">
-  <iframe id="frame2" class="my-frame" src="frame2.html" ></iframe>
-</div>
-
 <style>
   .my-frame {
     float: left;
@@ -23,6 +24,9 @@
     height: 5000px;
     float: left;
     width: 500px
+  }
+  .wrapper {
+    padding-top: 100px;
   }
   #div1,#div2 {
 
