@@ -19,9 +19,9 @@ export default class Portal {
     this.frame = document.createElement("iframe");
     this.frame.setAttribute("src", this.props.url + '?frame=true');
     this.frame.setAttribute("style", Portal.defaultFrameStyles);
-    this.frame.setAttribute("scrolling", "yes");
+    //this.frame.setAttribute("scrolling", "no");
     this.frame.setAttribute("width", "100%");
-    this.frame.setAttribute("height", "1024px");
+    this.frame.setAttribute("height", window.innerHeight);
     this.frame.setAttribute("allowFullScreen", true);
     this.frame.setAttribute("allow", "autoplay; encrypted-media; fullscreen");
     this.frame.addEventListener("load", () => {
