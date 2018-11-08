@@ -148,8 +148,19 @@ export default class Portal {
             name: "parentWindowParams",
             params: {
               innerHeight: this.getInnerHeight(),
-              notSenseOffsetTop: this.getNonSenseOffsetTop(this.props.offsetsConfig)}
+              notSenseOffsetTop: this.getNonSenseOffsetTop(this.props.offsetsConfig),
+              iOS: true
+            },
           });
+        });
+        this.applyExceptIOS(() => {
+          this.postMessage({
+             name: "parentWindowParams",
+             params: {
+               notSenseOffsetTop: this.getNonSenseOffsetTop(this.props.offsetsConfig),
+               iOS: false
+             },
+           });
         })
         setInterval(
           () => {
