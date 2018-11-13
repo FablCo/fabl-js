@@ -123,7 +123,6 @@ export default class Portal {
 
     this.applyExceptIOS(
       () => {
-        console.log('data.response', data.response)
         this.frameContentHeight = data.response;
         this.props.embedTo.setAttribute('style', "height: " + data.response + "px; position: relative");
       }
@@ -172,15 +171,38 @@ export default class Portal {
         this.applyTotalHeightOfFrame(data);
       }
       if (data.name === 'scroll') {
-        window.scrollTo(0, data.scroll + this.frameOffsetTop);
+        //window.scrollTo(0, data.scroll + this.frameOffsetTop);
+        this.scrollTo(data.scroll);
       }
   
       if (data.name === 'resize') {
-        window.scrollTo(0, data.scroll + this.frameOffsetTop);
+        this.scrollTo(data.scroll);
       }
     } catch (exception) {
       console.log('Ignored command', event);
     }
+  }
+
+  scrollTo = (scrollTarget) => {
+    this.scrollTarget = scrollTarget >= 0 ? scrollTarget : 0;
+    clearInterval(this.scrollInterval);
+    this.scrollInterval = setInterval(
+      () => {
+        if (window.scrollY > this.scrollTarget) {
+          let scrollToY = window.scrollY - 1;
+          scrollToY = scrollToY < this.scrollTarget ? this.scrollTarget : scrollToY;
+          window.scrollTo(0, scrollToY);
+        } else {
+          if (window.scrollY < this.scrollTarget) {
+            let scrollToY = window.scrollY + 1;
+            scrollToY = scrollToY > this.scrollTarget ? this.scrollTarget : scrollToY;
+            window.scrollTo(0, scrollToY);
+          } else {
+            clearInterval(this.scrollInterval);
+          }
+        }
+      }, 1
+    );
   }
 
   resize = () => {
