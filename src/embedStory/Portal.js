@@ -139,6 +139,7 @@ export default class Portal {
     try {
       const $this = this;
       const data = JSON.parse(event.data);
+      
       if (data.name === 'ping' && data.response === 'pong') {
         this.postMessage({ name: 'totalHeight' });
         this.postMessage({ name: "subscribe", subscriberName: "frame", subscriberGroup: "scroll" });
@@ -167,12 +168,17 @@ export default class Portal {
           }, 1000
         );
       }
+      
       if (data.name === 'totalHeight') {
         this.applyTotalHeightOfFrame(data);
       }
+      
       if (data.name === 'scroll') {
-        //window.scrollTo(0, data.scroll + this.frameOffsetTop);
         this.scrollTo(data.scroll);
+      }
+      
+      if (data.name === 'scrollFast') {
+        window.scrollTo(0, data.scroll + this.frameOffsetTop);
       }
   
       if (data.name === 'resize') {
